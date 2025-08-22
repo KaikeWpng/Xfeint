@@ -35,7 +35,7 @@ public class PessoaC {
     @PutMapping("/atualizar/{id}")
     public ResponseEntity<Pessoa> atualizar(@PathVariable Long id, @RequestBody PessoaRequestDTO pessoa) {
         try {
-            return ResponseEntity.ok(pessoaS.atualizar(id, pessoa));
+            return ResponseEntity.ok(pessoaS.(id, pessoa));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);
         }
