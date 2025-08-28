@@ -35,9 +35,19 @@ public class PessoaC {
     @PutMapping("/atualizar/{id}")
     public ResponseEntity<Pessoa> atualizar(@PathVariable Long id, @RequestBody PessoaRequestDTO pessoa) {
         try {
-            return ResponseEntity.ok(pessoaS.(id, pessoa));
+            return ResponseEntity.ok(pessoaS.atualizar(id, pessoa));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+    @DeleteMapping("/excluir/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+        try {
+            pessoaS.excluir(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
         }
     }
 }

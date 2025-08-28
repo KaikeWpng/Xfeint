@@ -1,6 +1,8 @@
 package br.com.senac.api.controllers;
 
+import br.com.senac.api.controllers.dtos.PessoaRequestDTO;
 import br.com.senac.api.controllers.dtos.ProdutoRequestDTO;
+import br.com.senac.api.entidades.Pessoa;
 import br.com.senac.api.entidades.Produto;
 import br.com.senac.api.servise.ProdutoS;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,24 @@ public class ProdutoC {
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.badRequest().body(null);
+        }
+    }
+    @PutMapping("/atualizar/{id}")
+    public ResponseEntity<Produto> atualizar(@PathVariable Long id, @RequestBody ProdutoRequestDTO produto) {
+        try {
+            return ResponseEntity.ok(produtoS.atualizar(id, produto));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
+    @DeleteMapping("/excluir/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+        try {
+            produtoS.excluir(id);
+            return ResponseEntity.noContent().build();
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
         }
     }
 }

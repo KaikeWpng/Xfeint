@@ -28,17 +28,23 @@ public class PessoaS {
         return pessoaR.save(pessoaPersist);
     }
 
-    public Carro atualizar(Long id, PessoaRequestDTO carro) throws Exception {
+    public Pessoa atualizar(Long id, PessoaRequestDTO pessoa) throws Exception {
         if (!pessoaR.existsById(id)) {
             throw new Exception("Registro não encontrado");
         } else {
-            Carro carroPersist = new Carro();
-            carroPersist.setMarca(carro.getMarca());
-            carroPersist.setModelo(carro.getModelo());
-            carroPersist.setId(id);
+            Pessoa pessoaPersist = new Pessoa();
+            pessoaPersist.setNome(pessoa.getNome());
+            pessoaPersist.setSobrenome(pessoa.getSobrenome());
+            pessoaPersist.setId(id);
 
-            return carroR.save(carroPersist);
+            return pessoaR.save(pessoaPersist);
+        }
+    }
+    public void excluir(Long id) throws Exception {
+        if (!pessoaR.existsById(id)) {
+            throw new Exception("Registro não encontrado para exclusão");
         }
 
+        pessoaR.deleteById(id);
     }
 }

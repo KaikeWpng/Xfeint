@@ -40,4 +40,11 @@ public class CarroS {
 
     }
 
+    public void excluir(Long id) throws Exception {
+        if (!carroR.existsById(id)) {
+            throw new Exception("Registro não encontrado para exclusão");
+        }
+
+        carroR.deleteById(id);
+    }
 }
